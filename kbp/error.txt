@@ -1,35 +1,4 @@
-<return xmlns="urn:schemas-microsoft-com:xml-analysis">
-  <results xmlns="http://schemas.microsoft.com/analysisservices/2003/xmla-multipleresults">
-    <root xmlns="urn:schemas-microsoft-com:xml-analysis:empty">
-      <Exception xmlns="urn:schemas-microsoft-com:xml-analysis:exception" />
-      <Messages xmlns="urn:schemas-microsoft-com:xml-analysis:exception">
-        <Error ErrorCode="3238002695" Description="Internal error: The operation terminated unsuccessfully." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3238395904" Description="OLE DB error: OLE DB or ODBC error: Login failed for user 'NT SERVICE\MSSQLServerOLAPService'.; 28000; Cannot open database &quot;ITKompanijaDW&quot; requested by the login. The login failed.; 42000." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3239182436" Description="Errors in the high-level relational engine. A connection could not be made to the data source with the DataSourceID of 'ds1', Name of 'ITKompanijaDW'." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034316" Description="Errors in the OLAP storage engine: An error occurred while the dimension, with the ID of 'dim_Klijent', Name of 'Klijent' was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034317" Description="Errors in the OLAP storage engine: An error occurred while the 'Klijent' attribute of the 'Klijent' dimension from the 'ITKompanijaDW_OLAP' database was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3238395904" Description="OLE DB error: OLE DB or ODBC error: Login failed for user 'NT SERVICE\MSSQLServerOLAPService'.; 28000; Cannot open database &quot;ITKompanijaDW&quot; requested by the login. The login failed.; 42000." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3239182436" Description="Errors in the high-level relational engine. A connection could not be made to the data source with the DataSourceID of 'ds1', Name of 'ITKompanijaDW'." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034316" Description="Errors in the OLAP storage engine: An error occurred while the dimension, with the ID of 'dim_Odeljenje', Name of 'Odeljenje' was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034317" Description="Errors in the OLAP storage engine: An error occurred while the 'Odeljenje' attribute of the 'Odeljenje' dimension from the 'ITKompanijaDW_OLAP' database was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3239837702" Description="Server: The current operation was cancelled because another operation in the transaction failed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3238395904" Description="OLE DB error: OLE DB or ODBC error: Login failed for user 'NT SERVICE\MSSQLServerOLAPService'.; 28000; Cannot open database &quot;ITKompanijaDW&quot; requested by the login. The login failed.; 42000." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3239182436" Description="Errors in the high-level relational engine. A connection could not be made to the data source with the DataSourceID of 'ds1', Name of 'ITKompanijaDW'." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034316" Description="Errors in the OLAP storage engine: An error occurred while the dimension, with the ID of 'dim_Godina', Name of 'Godina' was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034317" Description="Errors in the OLAP storage engine: An error occurred while the 'Godina' attribute of the 'Godina' dimension from the 'ITKompanijaDW_OLAP' database was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3238395904" Description="OLE DB error: OLE DB or ODBC error: Login failed for user 'NT SERVICE\MSSQLServerOLAPService'.; 28000; Cannot open database &quot;ITKompanijaDW&quot; requested by the login. The login failed.; 42000." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3239182436" Description="Errors in the high-level relational engine. A connection could not be made to the data source with the DataSourceID of 'ds1', Name of 'ITKompanijaDW'." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034316" Description="Errors in the OLAP storage engine: An error occurred while the dimension, with the ID of 'dim_Kvartal', Name of 'Kvartal' was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034317" Description="Errors in the OLAP storage engine: An error occurred while the 'Kvartal' attribute of the 'Kvartal' dimension from the 'ITKompanijaDW_OLAP' database was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3238395904" Description="OLE DB error: OLE DB or ODBC error: Login failed for user 'NT SERVICE\MSSQLServerOLAPService'.; 28000; Cannot open database &quot;ITKompanijaDW&quot; requested by the login. The login failed.; 42000." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3239182436" Description="Errors in the high-level relational engine. A connection could not be made to the data source with the DataSourceID of 'ds1', Name of 'ITKompanijaDW'." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034316" Description="Errors in the OLAP storage engine: An error occurred while the dimension, with the ID of 'dim_Zaposleni', Name of 'Zaposleni' was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034317" Description="Errors in the OLAP storage engine: An error occurred while the 'Zaposleni' attribute of the 'Zaposleni' dimension from the 'ITKompanijaDW_OLAP' database was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3238395904" Description="OLE DB error: OLE DB or ODBC error: Login failed for user 'NT SERVICE\MSSQLServerOLAPService'.; 28000; Cannot open database &quot;ITKompanijaDW&quot; requested by the login. The login failed.; 42000." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3239182436" Description="Errors in the high-level relational engine. A connection could not be made to the data source with the DataSourceID of 'ds1', Name of 'ITKompanijaDW'." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034316" Description="Errors in the OLAP storage engine: An error occurred while the dimension, with the ID of 'dim_Projekat', Name of 'Projekat' was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-        <Error ErrorCode="3240034317" Description="Errors in the OLAP storage engine: An error occurred while the 'Projekat' attribute of the 'Projekat' dimension from the 'ITKompanijaDW_OLAP' database was being processed." Source="Microsoft Analysis Services" HelpFile="" />
-      </Messages>
-    </root>
-  </results>
-</return>
+Msg 15025, Level 16, State 2, Line 16
+The server principal 'NT SERVICE\MSSQLServerOLAPService' already exists.
+Msg 15023, Level 16, State 1, Line 20
+User, group, or role 'NT SERVICE\MSSQLServerOLAPService' already exists in the current database.
