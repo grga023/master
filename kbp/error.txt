@@ -1,6 +1,6 @@
 Executing the query ...
-Decimal is not a valid value for this element.
-An error occurred while parsing the 'DataType' element at line 409, column 39 ('http://schemas.microsoft.com/analysisservices/2003/engine' namespace) under Envelope/Body/Execute/Command/Batch/Create/ObjectDefinition/Database/Cubes/Cube/MeasureGroups/MeasureGroup/Measures/Measure/Source/DataType.
+Avg is not a valid value for this element.
+An error occurred while parsing the 'AggregateFunction' element at line 431, column 52 ('http://schemas.microsoft.com/analysisservices/2003/engine' namespace) under Envelope/Body/Execute/Command/Batch/Create/ObjectDefinition/Database/Cubes/Cube/MeasureGroups/MeasureGroup/Measures/Measure/AggregateFunction.
 Run complete
 
 
