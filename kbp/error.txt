@@ -1,6 +1,10 @@
-Executing the query ...
-Avg is not a valid value for this element.
-An error occurred while parsing the 'AggregateFunction' element at line 431, column 52 ('http://schemas.microsoft.com/analysisservices/2003/engine' namespace) under Envelope/Body/Execute/Command/Batch/Create/ObjectDefinition/Database/Cubes/Cube/MeasureGroups/MeasureGroup/Measures/Measure/AggregateFunction.
-Run complete
-
-
+<return xmlns="urn:schemas-microsoft-com:xml-analysis">
+  <results xmlns="http://schemas.microsoft.com/analysisservices/2003/xmla-multipleresults">
+    <root xmlns="urn:schemas-microsoft-com:xml-analysis:empty">
+      <Exception xmlns="urn:schemas-microsoft-com:xml-analysis:exception" />
+      <Messages xmlns="urn:schemas-microsoft-com:xml-analysis:exception">
+        <Error ErrorCode="3239313514" Description="Errors in the metadata manager. The name column of the 'Godina' attribute is either missing or has a data type other than string." Source="Microsoft Analysis Services" HelpFile="" />
+      </Messages>
+    </root>
+  </results>
+</return>
