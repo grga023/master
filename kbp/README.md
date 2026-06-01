@@ -45,24 +45,36 @@ Data Warehouse (skladište podataka) za IT kompaniju "DevSoft d.o.o." koja se ba
 | Fajl | Opis |
 |------|------|
 | `ITKompanijaDW_kreiranje.sql` | Glavni SQL - kreira bazu, tabele, test podatke, VIEW-ove |
-| `PowerDesigner_CDM_script.vbs` | VBScript za automatsko kreiranje CDM u PowerDesigner-u |
-| `PowerDesigner_PDM_reverse_engineer.sql` | SQL za Reverse Engineer fizičkog modela |
+| `ITKompanijaDW_reverse_for_Oracle_DM.sql` | DDL za import u Oracle Data Modeler (Reverse Engineer) |
+| `UPUTSTVO_Oracle_DataModeler.md` | Vodič za Oracle SQL Developer Data Modeler (CDM/PDM) |
+| `PowerDesigner_CDM_script.vbs` | VBScript za PowerDesigner (alternativa, nije potreban) |
+| `PowerDesigner_PDM_reverse_engineer.sql` | SQL za Reverse Engineer u PowerDesigner-u (alternativa) |
 | `UPUTSTVO.txt` | Detaljan korak-po-korak vodič za izradu |
 | `Prodavnica filmova PRIMER.pdf` | Referentni primer seminarskog rada |
 
 ## Alati
-1. **SAP PowerDesigner 16** - CDM/PDM modeli
+1. **Oracle SQL Developer Data Modeler** (BESPLATAN) - CDM/PDM modeli
+   - Download: https://www.oracle.com/tools/downloads/sql-developer-data-modeler-downloads.html
+   - Vodič: `UPUTSTVO_Oracle_DataModeler.md`
+   - ~~SAP PowerDesigner 16~~ (nije potreban, plaća se)
 2. **SQL Server 2008+ / SSMS** - baza podataka
 3. **SQL Server BIDS (ili SSDT)** - OLAP kocka
 4. **Microsoft Excel 2010+** - Pivot tabele i grafikoni
 
 ## Šta je ostalo da se uradi
-- [ ] Pokrenuti PowerDesigner skriptu i slikati CDM (Slika 1)
-- [ ] Generisati/importovati PDM i slikati (Slika 2)
+- [ ] U Oracle Data Modeler: Import DDL → dobiti PDM → Engineer to Logical → dobiti CDM
+- [ ] Eksportovati slike: CDM (Slika 1) i PDM (Slika 2)
 - [ ] Pokrenuti SQL skriptu u SSMS i napraviti Database Diagram (Slika 3)
 - [ ] U BIDS-u kreirati Analysis Services projekat (Slike 4-8)
 - [ ] U Excel-u napraviti Pivot tabele i grafikone (Slike 9-12)
 - [ ] Napisati/formatirati finalni Word dokument sa svim slikama
+
+## Brzi start za CDM/PDM (Oracle Data Modeler)
+1. Skini ZIP sa oracle.com, raspakuj, pokreni `datamodeler.exe`
+2. `File → Import → DDL File` → odaberi `ITKompanijaDW_reverse_for_Oracle_DM.sql`
+3. RDBMS: SQL Server → Import → dobijaš PDM (Slika 2)
+4. `Engineer → Engineer to Logical Model` → dobijaš CDM (Slika 1)
+5. Eksportuj slike: `File → Export → To Image File`
 
 ## Kontekst za nastavak sesije
 Ako treba ponovo da nastaviš rad sa AI asistentom, daj mu ovaj fajl i reci:
