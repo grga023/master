@@ -1,0 +1,742 @@
+<!-- ============================================================ -->
+<!-- OLAP Kocka - XMLA Script za SQL Server Analysis Services     -->
+<!-- Seminarski rad: Data Warehouse IT kompanije                   -->
+<!-- Student: Ognjen Grgur, MIT 37/24                             -->
+<!--                                                               -->
+<!-- UPUTSTVO:                                                     -->
+<!-- 1. Otvori SSMS                                                -->
+<!-- 2. Connect -> Analysis Services -> localhost                   -->
+<!-- 3. File -> New -> Analysis Services XMLA Query                 -->
+<!-- 4. Zalepi ceo ovaj fajl                                       -->
+<!-- 5. Execute (F5)                                                -->
+<!-- 6. Posle toga: desni klik na bazu -> Process -> Process Full   -->
+<!-- ============================================================ -->
+
+<Batch xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <Alter AllowCreate="true" ObjectExpansion="ExpandFull">
+    <Object>
+      <DatabaseID>ITKompanijaDW_OLAP</DatabaseID>
+    </Object>
+    <ObjectDefinition>
+      <Database xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2"
+                xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2">
+        <ID>ITKompanijaDW_OLAP</ID>
+        <Name>ITKompanijaDW_OLAP</Name>
+        <DataSources>
+          <DataSource xsi:type="RelationalDataSource">
+            <ID>ITKompanijaDW</ID>
+            <Name>ITKompanijaDW</Name>
+            <ConnectionString>Provider=SQLNCLI11.1;Data Source=.\SQLEXPRESS;Initial Catalog=ITKompanijaDW;Integrated Security=SSPI;</ConnectionString>
+            <ImpersonationInfo>
+              <ImpersonationMode>ImpersonateServiceAccount</ImpersonationMode>
+            </ImpersonationInfo>
+          </DataSource>
+        </DataSources>
+        <DataSourceViews>
+          <DataSourceView>
+            <ID>ITKompanijaDW_DSV</ID>
+            <Name>ITKompanijaDW_DSV</Name>
+            <DataSourceID>ITKompanijaDW</DataSourceID>
+            <Schema>
+              <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+                <xs:element name="ITKompanijaDW_DSV" msdata:IsDataSet="true">
+                  <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+
+                      <xs:element name="Analiza_troska_rada" msprop:DbTableName="Analiza_troska_rada" msprop:TableType="View" msprop:QueryDefinition="SELECT idEvidencije, idZaposlenog, imeZaposlenog, pozicija, nazivOdeljenja, idProjekta, nazivProjekta, statusProjekta, klijent, grad, drzava, datum, brojSati, satnica, TrosakRada, Godina, Mesec, Kvartal FROM dbo.Analiza_troska_rada">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="idEvidencije" type="xs:int" />
+                            <xs:element name="idZaposlenog" type="xs:int" />
+                            <xs:element name="imeZaposlenog" type="xs:string" minOccurs="0" />
+                            <xs:element name="pozicija" type="xs:string" minOccurs="0" />
+                            <xs:element name="nazivOdeljenja" type="xs:string" minOccurs="0" />
+                            <xs:element name="idProjekta" type="xs:int" />
+                            <xs:element name="nazivProjekta" type="xs:string" minOccurs="0" />
+                            <xs:element name="statusProjekta" type="xs:string" minOccurs="0" />
+                            <xs:element name="klijent" type="xs:string" minOccurs="0" />
+                            <xs:element name="grad" type="xs:string" minOccurs="0" />
+                            <xs:element name="drzava" type="xs:string" minOccurs="0" />
+                            <xs:element name="datum" type="xs:dateTime" minOccurs="0" />
+                            <xs:element name="brojSati" type="xs:decimal" minOccurs="0" />
+                            <xs:element name="satnica" type="xs:decimal" minOccurs="0" />
+                            <xs:element name="TrosakRada" type="xs:decimal" minOccurs="0" />
+                            <xs:element name="Godina" type="xs:int" minOccurs="0" />
+                            <xs:element name="Mesec" type="xs:int" minOccurs="0" />
+                            <xs:element name="Kvartal" type="xs:int" minOccurs="0" />
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+
+                      <xs:element name="Analiza_prihoda" msprop:DbTableName="Analiza_prihoda" msprop:TableType="View" msprop:QueryDefinition="SELECT idFakture, idProjekta, nazivProjekta, budzet, statusProjekta, klijent, grad, drzava, mesec, godina, ukupnoSati, iznos, statusFakture, Kvartal FROM dbo.Analiza_prihoda">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="idFakture" type="xs:int" />
+                            <xs:element name="idProjekta" type="xs:int" />
+                            <xs:element name="nazivProjekta" type="xs:string" minOccurs="0" />
+                            <xs:element name="budzet" type="xs:decimal" minOccurs="0" />
+                            <xs:element name="statusProjekta" type="xs:string" minOccurs="0" />
+                            <xs:element name="klijent" type="xs:string" minOccurs="0" />
+                            <xs:element name="grad" type="xs:string" minOccurs="0" />
+                            <xs:element name="drzava" type="xs:string" minOccurs="0" />
+                            <xs:element name="mesec" type="xs:int" minOccurs="0" />
+                            <xs:element name="godina" type="xs:int" minOccurs="0" />
+                            <xs:element name="ukupnoSati" type="xs:decimal" minOccurs="0" />
+                            <xs:element name="iznos" type="xs:decimal" minOccurs="0" />
+                            <xs:element name="statusFakture" type="xs:string" minOccurs="0" />
+                            <xs:element name="Kvartal" type="xs:int" minOccurs="0" />
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+
+                    </xs:choice>
+                  </xs:complexType>
+                  <xs:unique name="PK_Analiza_troska_rada">
+                    <xs:selector xpath=".//Analiza_troska_rada" />
+                    <xs:field xpath="idEvidencije" />
+                  </xs:unique>
+                  <xs:unique name="PK_Analiza_prihoda">
+                    <xs:selector xpath=".//Analiza_prihoda" />
+                    <xs:field xpath="idFakture" />
+                  </xs:unique>
+                </xs:element>
+              </xs:schema>
+            </Schema>
+          </DataSourceView>
+        </DataSourceViews>
+
+        <!-- ==================== DIMENZIJE ==================== -->
+        <Dimensions>
+
+          <!-- Dimenzija: Zaposleni -->
+          <Dimension>
+            <ID>dim_Zaposleni</ID>
+            <Name>Zaposleni</Name>
+            <DataSourceViewID>ITKompanijaDW_DSV</DataSourceViewID>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>Analiza_troska_rada</TableID>
+                  <ColumnID>idZaposlenog</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <NameColumn>
+              <DataType>WChar</DataType>
+              <Source xsi:type="ColumnBinding">
+                <TableID>Analiza_troska_rada</TableID>
+                <ColumnID>imeZaposlenog</ColumnID>
+              </Source>
+            </NameColumn>
+            <Attributes>
+              <Attribute>
+                <ID>imeZaposlenog</ID>
+                <Name>Zaposleni</Name>
+                <Usage>Key</Usage>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>Integer</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>idZaposlenog</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+                <NameColumn>
+                  <DataType>WChar</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>Analiza_troska_rada</TableID>
+                    <ColumnID>imeZaposlenog</ColumnID>
+                  </Source>
+                </NameColumn>
+              </Attribute>
+              <Attribute>
+                <ID>pozicija</ID>
+                <Name>Pozicija</Name>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>WChar</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>pozicija</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+              </Attribute>
+            </Attributes>
+          </Dimension>
+
+          <!-- Dimenzija: Odeljenje -->
+          <Dimension>
+            <ID>dim_Odeljenje</ID>
+            <Name>Odeljenje</Name>
+            <DataSourceViewID>ITKompanijaDW_DSV</DataSourceViewID>
+            <Attributes>
+              <Attribute>
+                <ID>nazivOdeljenja</ID>
+                <Name>Odeljenje</Name>
+                <Usage>Key</Usage>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>WChar</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>nazivOdeljenja</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+              </Attribute>
+            </Attributes>
+          </Dimension>
+
+          <!-- Dimenzija: Projekat -->
+          <Dimension>
+            <ID>dim_Projekat</ID>
+            <Name>Projekat</Name>
+            <DataSourceViewID>ITKompanijaDW_DSV</DataSourceViewID>
+            <Attributes>
+              <Attribute>
+                <ID>nazivProjekta</ID>
+                <Name>Projekat</Name>
+                <Usage>Key</Usage>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>Integer</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>idProjekta</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+                <NameColumn>
+                  <DataType>WChar</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>Analiza_troska_rada</TableID>
+                    <ColumnID>nazivProjekta</ColumnID>
+                  </Source>
+                </NameColumn>
+              </Attribute>
+              <Attribute>
+                <ID>statusProjekta</ID>
+                <Name>Status Projekta</Name>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>WChar</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>statusProjekta</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+              </Attribute>
+            </Attributes>
+          </Dimension>
+
+          <!-- Dimenzija: Klijent -->
+          <Dimension>
+            <ID>dim_Klijent</ID>
+            <Name>Klijent</Name>
+            <DataSourceViewID>ITKompanijaDW_DSV</DataSourceViewID>
+            <Attributes>
+              <Attribute>
+                <ID>klijent</ID>
+                <Name>Klijent</Name>
+                <Usage>Key</Usage>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>WChar</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>klijent</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+              </Attribute>
+              <Attribute>
+                <ID>grad</ID>
+                <Name>Grad</Name>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>WChar</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>grad</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+              </Attribute>
+              <Attribute>
+                <ID>drzava</ID>
+                <Name>Drzava</Name>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>WChar</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>drzava</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+              </Attribute>
+            </Attributes>
+          </Dimension>
+
+          <!-- Dimenzija: Vreme -->
+          <Dimension>
+            <ID>dim_Vreme</ID>
+            <Name>Vreme</Name>
+            <DataSourceViewID>ITKompanijaDW_DSV</DataSourceViewID>
+            <Attributes>
+              <Attribute>
+                <ID>Godina</ID>
+                <Name>Godina</Name>
+                <Usage>Key</Usage>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>Integer</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>Godina</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                  <KeyColumn>
+                    <DataType>Integer</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>Kvartal</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                  <KeyColumn>
+                    <DataType>Integer</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>Mesec</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+              </Attribute>
+              <Attribute>
+                <ID>Kvartal</ID>
+                <Name>Kvartal</Name>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>Integer</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>Kvartal</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+              </Attribute>
+              <Attribute>
+                <ID>Mesec</ID>
+                <Name>Mesec</Name>
+                <KeyColumns>
+                  <KeyColumn>
+                    <DataType>Integer</DataType>
+                    <Source xsi:type="ColumnBinding">
+                      <TableID>Analiza_troska_rada</TableID>
+                      <ColumnID>Mesec</ColumnID>
+                    </Source>
+                  </KeyColumn>
+                </KeyColumns>
+              </Attribute>
+            </Attributes>
+            <Hierarchies>
+              <Hierarchy>
+                <ID>hier_Vreme</ID>
+                <Name>Vreme</Name>
+                <Levels>
+                  <Level>
+                    <ID>lvl_Godina</ID>
+                    <Name>Godina</Name>
+                    <SourceAttributeID>Godina</SourceAttributeID>
+                  </Level>
+                  <Level>
+                    <ID>lvl_Kvartal</ID>
+                    <Name>Kvartal</Name>
+                    <SourceAttributeID>Kvartal</SourceAttributeID>
+                  </Level>
+                  <Level>
+                    <ID>lvl_Mesec</ID>
+                    <Name>Mesec</Name>
+                    <SourceAttributeID>Mesec</SourceAttributeID>
+                  </Level>
+                </Levels>
+              </Hierarchy>
+            </Hierarchies>
+          </Dimension>
+
+        </Dimensions>
+
+        <!-- ==================== KOCKE ==================== -->
+        <Cubes>
+
+          <!-- KOCKA 1: cbProduktivnost -->
+          <Cube>
+            <ID>cbProduktivnost</ID>
+            <Name>cbProduktivnost</Name>
+            <DataSourceViewID>ITKompanijaDW_DSV</DataSourceViewID>
+            <Dimensions>
+              <Dimension>
+                <ID>cbProd_dim_Zaposleni</ID>
+                <Name>Zaposleni</Name>
+                <DimensionID>dim_Zaposleni</DimensionID>
+              </Dimension>
+              <Dimension>
+                <ID>cbProd_dim_Odeljenje</ID>
+                <Name>Odeljenje</Name>
+                <DimensionID>dim_Odeljenje</DimensionID>
+              </Dimension>
+              <Dimension>
+                <ID>cbProd_dim_Projekat</ID>
+                <Name>Projekat</Name>
+                <DimensionID>dim_Projekat</DimensionID>
+              </Dimension>
+              <Dimension>
+                <ID>cbProd_dim_Klijent</ID>
+                <Name>Klijent</Name>
+                <DimensionID>dim_Klijent</DimensionID>
+              </Dimension>
+              <Dimension>
+                <ID>cbProd_dim_Vreme</ID>
+                <Name>Vreme</Name>
+                <DimensionID>dim_Vreme</DimensionID>
+              </Dimension>
+            </Dimensions>
+            <MeasureGroups>
+              <MeasureGroup>
+                <ID>mg_Produktivnost</ID>
+                <Name>Produktivnost</Name>
+                <Measures>
+                  <Measure>
+                    <ID>m_BrojSati</ID>
+                    <Name>Broj Sati</Name>
+                    <AggregateFunction>Sum</AggregateFunction>
+                    <Source>
+                      <DataType>Decimal</DataType>
+                      <Source xsi:type="ColumnBinding">
+                        <TableID>Analiza_troska_rada</TableID>
+                        <ColumnID>brojSati</ColumnID>
+                      </Source>
+                    </Source>
+                  </Measure>
+                  <Measure>
+                    <ID>m_TrosakRada</ID>
+                    <Name>Trosak Rada</Name>
+                    <AggregateFunction>Sum</AggregateFunction>
+                    <Source>
+                      <DataType>Decimal</DataType>
+                      <Source xsi:type="ColumnBinding">
+                        <TableID>Analiza_troska_rada</TableID>
+                        <ColumnID>TrosakRada</ColumnID>
+                      </Source>
+                    </Source>
+                  </Measure>
+                  <Measure>
+                    <ID>m_Satnica</ID>
+                    <Name>Prosecna Satnica</Name>
+                    <AggregateFunction>Avg</AggregateFunction>
+                    <Source>
+                      <DataType>Decimal</DataType>
+                      <Source xsi:type="ColumnBinding">
+                        <TableID>Analiza_troska_rada</TableID>
+                        <ColumnID>satnica</ColumnID>
+                      </Source>
+                    </Source>
+                  </Measure>
+                  <Measure>
+                    <ID>m_BrojEvidencija</ID>
+                    <Name>Broj Evidencija</Name>
+                    <AggregateFunction>Count</AggregateFunction>
+                    <Source>
+                      <DataType>Integer</DataType>
+                      <Source xsi:type="ColumnBinding">
+                        <TableID>Analiza_troska_rada</TableID>
+                        <ColumnID>idEvidencije</ColumnID>
+                      </Source>
+                    </Source>
+                  </Measure>
+                </Measures>
+                <Dimensions>
+                  <Dimension xsi:type="DegenerateMeasureGroupDimension">
+                    <CubeDimensionID>cbProd_dim_Zaposleni</CubeDimensionID>
+                    <Attributes>
+                      <Attribute>
+                        <AttributeID>imeZaposlenog</AttributeID>
+                        <KeyColumns>
+                          <KeyColumn>
+                            <DataType>Integer</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_troska_rada</TableID>
+                              <ColumnID>idZaposlenog</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                        </KeyColumns>
+                      </Attribute>
+                    </Attributes>
+                  </Dimension>
+                  <Dimension xsi:type="DegenerateMeasureGroupDimension">
+                    <CubeDimensionID>cbProd_dim_Odeljenje</CubeDimensionID>
+                    <Attributes>
+                      <Attribute>
+                        <AttributeID>nazivOdeljenja</AttributeID>
+                        <KeyColumns>
+                          <KeyColumn>
+                            <DataType>WChar</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_troska_rada</TableID>
+                              <ColumnID>nazivOdeljenja</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                        </KeyColumns>
+                      </Attribute>
+                    </Attributes>
+                  </Dimension>
+                  <Dimension xsi:type="DegenerateMeasureGroupDimension">
+                    <CubeDimensionID>cbProd_dim_Projekat</CubeDimensionID>
+                    <Attributes>
+                      <Attribute>
+                        <AttributeID>nazivProjekta</AttributeID>
+                        <KeyColumns>
+                          <KeyColumn>
+                            <DataType>Integer</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_troska_rada</TableID>
+                              <ColumnID>idProjekta</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                        </KeyColumns>
+                      </Attribute>
+                    </Attributes>
+                  </Dimension>
+                  <Dimension xsi:type="DegenerateMeasureGroupDimension">
+                    <CubeDimensionID>cbProd_dim_Klijent</CubeDimensionID>
+                    <Attributes>
+                      <Attribute>
+                        <AttributeID>klijent</AttributeID>
+                        <KeyColumns>
+                          <KeyColumn>
+                            <DataType>WChar</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_troska_rada</TableID>
+                              <ColumnID>klijent</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                        </KeyColumns>
+                      </Attribute>
+                    </Attributes>
+                  </Dimension>
+                  <Dimension xsi:type="DegenerateMeasureGroupDimension">
+                    <CubeDimensionID>cbProd_dim_Vreme</CubeDimensionID>
+                    <Attributes>
+                      <Attribute>
+                        <AttributeID>Godina</AttributeID>
+                        <KeyColumns>
+                          <KeyColumn>
+                            <DataType>Integer</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_troska_rada</TableID>
+                              <ColumnID>Godina</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                          <KeyColumn>
+                            <DataType>Integer</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_troska_rada</TableID>
+                              <ColumnID>Kvartal</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                          <KeyColumn>
+                            <DataType>Integer</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_troska_rada</TableID>
+                              <ColumnID>Mesec</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                        </KeyColumns>
+                      </Attribute>
+                    </Attributes>
+                  </Dimension>
+                </Dimensions>
+                <Partitions>
+                  <Partition>
+                    <ID>part_Produktivnost</ID>
+                    <Name>Produktivnost</Name>
+                    <Source xsi:type="TableBinding">
+                      <DataSourceID>ITKompanijaDW</DataSourceID>
+                      <DbTableName>Analiza_troska_rada</DbTableName>
+                    </Source>
+                    <StorageMode>Molap</StorageMode>
+                  </Partition>
+                </Partitions>
+              </MeasureGroup>
+            </MeasureGroups>
+          </Cube>
+
+          <!-- KOCKA 2: cbPrihodi -->
+          <Cube>
+            <ID>cbPrihodi</ID>
+            <Name>cbPrihodi</Name>
+            <DataSourceViewID>ITKompanijaDW_DSV</DataSourceViewID>
+            <Dimensions>
+              <Dimension>
+                <ID>cbPrih_dim_Projekat</ID>
+                <Name>Projekat</Name>
+                <DimensionID>dim_Projekat</DimensionID>
+              </Dimension>
+              <Dimension>
+                <ID>cbPrih_dim_Klijent</ID>
+                <Name>Klijent</Name>
+                <DimensionID>dim_Klijent</DimensionID>
+              </Dimension>
+              <Dimension>
+                <ID>cbPrih_dim_Vreme</ID>
+                <Name>Vreme</Name>
+                <DimensionID>dim_Vreme</DimensionID>
+              </Dimension>
+            </Dimensions>
+            <MeasureGroups>
+              <MeasureGroup>
+                <ID>mg_Prihodi</ID>
+                <Name>Prihodi</Name>
+                <Measures>
+                  <Measure>
+                    <ID>m_Iznos</ID>
+                    <Name>Iznos</Name>
+                    <AggregateFunction>Sum</AggregateFunction>
+                    <Source>
+                      <DataType>Decimal</DataType>
+                      <Source xsi:type="ColumnBinding">
+                        <TableID>Analiza_prihoda</TableID>
+                        <ColumnID>iznos</ColumnID>
+                      </Source>
+                    </Source>
+                  </Measure>
+                  <Measure>
+                    <ID>m_UkupnoSati</ID>
+                    <Name>Ukupno Sati</Name>
+                    <AggregateFunction>Sum</AggregateFunction>
+                    <Source>
+                      <DataType>Decimal</DataType>
+                      <Source xsi:type="ColumnBinding">
+                        <TableID>Analiza_prihoda</TableID>
+                        <ColumnID>ukupnoSati</ColumnID>
+                      </Source>
+                    </Source>
+                  </Measure>
+                  <Measure>
+                    <ID>m_Budzet</ID>
+                    <Name>Budzet</Name>
+                    <AggregateFunction>Sum</AggregateFunction>
+                    <Source>
+                      <DataType>Decimal</DataType>
+                      <Source xsi:type="ColumnBinding">
+                        <TableID>Analiza_prihoda</TableID>
+                        <ColumnID>budzet</ColumnID>
+                      </Source>
+                    </Source>
+                  </Measure>
+                  <Measure>
+                    <ID>m_BrojFaktura</ID>
+                    <Name>Broj Faktura</Name>
+                    <AggregateFunction>Count</AggregateFunction>
+                    <Source>
+                      <DataType>Integer</DataType>
+                      <Source xsi:type="ColumnBinding">
+                        <TableID>Analiza_prihoda</TableID>
+                        <ColumnID>idFakture</ColumnID>
+                      </Source>
+                    </Source>
+                  </Measure>
+                </Measures>
+                <Dimensions>
+                  <Dimension xsi:type="DegenerateMeasureGroupDimension">
+                    <CubeDimensionID>cbPrih_dim_Projekat</CubeDimensionID>
+                    <Attributes>
+                      <Attribute>
+                        <AttributeID>nazivProjekta</AttributeID>
+                        <KeyColumns>
+                          <KeyColumn>
+                            <DataType>Integer</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_prihoda</TableID>
+                              <ColumnID>idProjekta</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                        </KeyColumns>
+                      </Attribute>
+                    </Attributes>
+                  </Dimension>
+                  <Dimension xsi:type="DegenerateMeasureGroupDimension">
+                    <CubeDimensionID>cbPrih_dim_Klijent</CubeDimensionID>
+                    <Attributes>
+                      <Attribute>
+                        <AttributeID>klijent</AttributeID>
+                        <KeyColumns>
+                          <KeyColumn>
+                            <DataType>WChar</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_prihoda</TableID>
+                              <ColumnID>klijent</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                        </KeyColumns>
+                      </Attribute>
+                    </Attributes>
+                  </Dimension>
+                  <Dimension xsi:type="DegenerateMeasureGroupDimension">
+                    <CubeDimensionID>cbPrih_dim_Vreme</CubeDimensionID>
+                    <Attributes>
+                      <Attribute>
+                        <AttributeID>Godina</AttributeID>
+                        <KeyColumns>
+                          <KeyColumn>
+                            <DataType>Integer</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_prihoda</TableID>
+                              <ColumnID>godina</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                          <KeyColumn>
+                            <DataType>Integer</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_prihoda</TableID>
+                              <ColumnID>Kvartal</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                          <KeyColumn>
+                            <DataType>Integer</DataType>
+                            <Source xsi:type="ColumnBinding">
+                              <TableID>Analiza_prihoda</TableID>
+                              <ColumnID>mesec</ColumnID>
+                            </Source>
+                          </KeyColumn>
+                        </KeyColumns>
+                      </Attribute>
+                    </Attributes>
+                  </Dimension>
+                </Dimensions>
+                <Partitions>
+                  <Partition>
+                    <ID>part_Prihodi</ID>
+                    <Name>Prihodi</Name>
+                    <Source xsi:type="TableBinding">
+                      <DataSourceID>ITKompanijaDW</DataSourceID>
+                      <DbTableName>Analiza_prihoda</DbTableName>
+                    </Source>
+                    <StorageMode>Molap</StorageMode>
+                  </Partition>
+                </Partitions>
+              </MeasureGroup>
+            </MeasureGroups>
+          </Cube>
+
+        </Cubes>
+      </Database>
+    </ObjectDefinition>
+  </Alter>
+</Batch>

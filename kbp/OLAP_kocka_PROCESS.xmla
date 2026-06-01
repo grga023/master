@@ -1,0 +1,18 @@
+<!-- ============================================================ -->
+<!-- XMLA za procesiranje (punjenje) kocke podacima               -->
+<!-- Pokreni OVO posle prvog XMLA fajla                           -->
+<!--                                                               -->
+<!-- U SSMS: Connect -> Analysis Services -> localhost             -->
+<!-- File -> New -> Analysis Services XMLA Query                    -->
+<!-- Zalepi i Execute (F5)                                         -->
+<!-- ============================================================ -->
+
+<Batch xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <Process xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Type>ProcessFull</Type>
+    <Object>
+      <DatabaseID>ITKompanijaDW_OLAP</DatabaseID>
+    </Object>
+  </Process>
+</Batch>
