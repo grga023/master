@@ -3,7 +3,7 @@
     <root xmlns="urn:schemas-microsoft-com:xml-analysis:empty">
       <Exception xmlns="urn:schemas-microsoft-com:xml-analysis:exception" />
       <Messages xmlns="urn:schemas-microsoft-com:xml-analysis:exception">
-        <Error ErrorCode="3239313514" Description="Errors in the metadata manager. The name column of the 'Godina' attribute is either missing or has a data type other than string." Source="Microsoft Analysis Services" HelpFile="" />
+        <Error ErrorCode="3239313727" Description="Errors in the metadata manager. The 'Zaposleni' dimension in the 'Produktivnost' measure group has either zero or multiple granularity attributes. Must have exactly one attribute." Source="Microsoft Analysis Services" HelpFile="" />
       </Messages>
     </root>
   </results>
