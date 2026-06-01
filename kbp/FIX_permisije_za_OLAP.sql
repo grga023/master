@@ -19,5 +19,5 @@ USE [ITKompanijaDW]
 GO
 CREATE USER [NT SERVICE\MSSQLServerOLAPService] FOR LOGIN [NT SERVICE\MSSQLServerOLAPService]
 GO
-ALTER ROLE [db_datareader] ADD MEMBER [NT SERVICE\MSSQLServerOLAPService]
+EXEC sp_addrolemember 'db_datareader', 'NT SERVICE\MSSQLServerOLAPService'
 GO
