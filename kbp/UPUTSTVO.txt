@@ -1,0 +1,168 @@
+================================================================================
+  SEMINARSKI RAD: Data Warehouse IT kompanije
+  Student: Ognjen Grgur, MIT 37/24
+  
+  UPUTSTVO - KORACI I ALATI
+================================================================================
+
+════════════════════════════════════════════════════════════════════════════════
+  ALATI KOJE TREBA DA KORISTIS:
+════════════════════════════════════════════════════════════════════════════════
+
+1. SAP PowerDesigner 16.x
+   - Za kreiranje Konceptualnog modela (CDM) - slika entiteta i veza
+   - Za kreiranje Fizickog modela (PDM) - slika tabela sa tipovima
+   - Besplatna verzija: PowerDesigner Viewer (samo za pregled)
+   - Alternativa: moguce koristiti i preko Reverse Engineer-a
+
+2. Microsoft SQL Server 2008 (ili noviji: 2014, 2017, 2019)
+   - SQL Server Management Studio (SSMS) - za bazu podataka
+   - Kreiranje baze, tabela, unos podataka, pokretanje upita
+   - Dijagram baze podataka (Database Diagram)
+
+3. SQL Server Business Intelligence Development Studio (BIDS)
+   - Dolazi uz SQL Server 2008
+   - Za novije verzije: SQL Server Data Tools (SSDT)
+   - Kreiranje Analysis Services projekta (OLAP kocka)
+   - Data Source, Data Source View, Dimensions, Cube
+
+4. Microsoft Excel 2010+ 
+   - Za PivotTable i PivotChart
+   - Povezivanje na Analysis Services (OLAP kocku)
+   - Kreiranje grafikona
+
+
+════════════════════════════════════════════════════════════════════════════════
+  REDOSLED KORAKA:
+════════════════════════════════════════════════════════════════════════════════
+
+KORAK 1: PowerDesigner - Konceptualni model (CDM)
+─────────────────────────────────────────────────
+  - Otvori PowerDesigner
+  - File -> New Model -> Conceptual Data Model
+  - Koristi skriptu: PowerDesigner_CDM_script.vbs
+    (Tools -> Execute Commands -> Run Script)
+  - ILI kreiraj rucno entitete prema uputstvu u tom fajlu
+  - SLIKAJ: konceptualni model (to je Slika 1 u radu)
+
+KORAK 2: PowerDesigner - Fizicki model (PDM)
+─────────────────────────────────────────────
+  Opcija A (iz CDM-a):
+    - Tools -> Generate Physical Data Model
+    - Izaberi DBMS: Microsoft SQL Server 2008
+    - Generise se PDM automatski
+  
+  Opcija B (Reverse Engineer):
+    - File -> New Model -> Physical Data Model (SQL Server 2008)
+    - Database -> Reverse Engineer -> Using script files
+    - Ucitaj fajl: PowerDesigner_PDM_reverse_engineer.sql
+  
+  - SLIKAJ: fizicki model (to je Slika 2 u radu)
+  - Zatim: Database -> Generate Database -> kreiraj SQL skriptu
+
+KORAK 3: SQL Server - Kreiranje baze
+─────────────────────────────────────
+  - Otvori SQL Server Management Studio
+  - Povezi se na server (localhost ili naziv servera)
+  - Otvori fajl: ITKompanijaDW_kreiranje.sql
+  - Izvrsi ceo skript (F5)
+  - Ovo kreira bazu, tabele, unosi podatke i kreira VIEW-ove
+  - Za dijagram: desni klik na Database Diagrams -> New Diagram
+    -> dodaj sve tabele -> SLIKAJ (to je Slika 3 u radu)
+
+KORAK 4: BIDS - Kreiranje OLAP kocke
+─────────────────────────────────────
+  - Otvori SQL Server Business Intelligence Development Studio
+  - File -> New -> Project -> Analysis Services Project
+  - Naziv projekta: ITKompanijaDW_OLAP
+  
+  4a) Data Source:
+    - Solution Explorer -> desni klik Data Sources -> New Data Source
+    - Connection: localhost, baza ITKompanijaDW
+    - SLIKAJ
+  
+  4b) Data Source View:
+    - Desni klik Data Source Views -> New Data Source View
+    - Dodaj tabele: Zaposleni, Odeljenje, Projekat, Klijent, 
+      Tehnologija, EvidencijaSati, Faktura, ProjekatTehnologija
+    - Dodaj i VIEW: Analiza_troska_rada
+    - SLIKAJ (to je Slika 4 - Data Source View)
+  
+  4c) Dimensions:
+    - Desni klik Dimensions -> New Dimension
+    - Kreiraj dimenzije:
+      * Dim_Zaposleni (iz tabele Zaposleni - ime, prezime, pozicija)
+      * Dim_Odeljenje (iz tabele Odeljenje - nazivOdeljenja)
+      * Dim_Projekat (iz tabele Projekat - nazivProjekta, status)
+      * Dim_Klijent (iz tabele Klijent - nazivKompanije, grad, drzava)
+      * Dim_Tehnologija (iz tabele Tehnologija - naziv, kategorija)
+      * Dim_Vreme - VAZNO: izaberi "Generate a time table in the data source"
+        Period: 01/01/2023 do 12/31/2026
+        Intervali: Year, Half Year, Quarter, Month
+    - SLIKAJ dimenzije (to je Slika 5)
+  
+  4d) Cube:
+    - Desni klik Cubes -> New Cube
+    - Use existing tables
+    - Fact table: Analiza_troska_rada (ili EvidencijaSati)
+    - Mere: SUM(brojSati), SUM(TrosakRada)
+    - Dimenzije: sve prethodno kreirane
+    - SLIKAJ kocku (to je Slika 6 - mere, Slika 7 - snowflake)
+    - SLIKAJ Time Dimension Wizard (to je Slika 8)
+  
+  4e) Deploy:
+    - Desni klik na projekat -> Properties -> Deployment -> Server: localhost
+    - Build -> Deploy
+    - Ovo postavlja OLAP kocku na Analysis Services
+
+KORAK 5: Excel - Pivot tabele i grafikoni
+──────────────────────────────────────────
+  - Otvori Excel
+  - Data -> From Other Sources -> From Analysis Services
+  - Server: localhost
+  - Baza: ITKompanijaDW_OLAP
+  - Kocka: izaberi kocku
+  - SLIKAJ Data Connection Wizard (to je Slika 9)
+  
+  5a) PivotTable:
+    - Prevuci dimenzije u Row/Column Labels
+    - Prevuci mere u Values
+    - Napravi tabelu: Sati po odeljenjima/projektima
+    - SLIKAJ
+  
+  5b) PivotChart:
+    - Insert -> PivotChart
+    - Grafikon 1: Prihodi po klijentima (bar chart) -> SLIKAJ (Slika 10)
+    - Grafikon 2: Produktivnost po mesecima (line chart) -> SLIKAJ (Slika 11)
+    - Grafikon 3: Tehnologije (pie chart) -> SLIKAJ (Slika 12)
+
+
+════════════════════════════════════════════════════════════════════════════════
+  FAJLOVI U OVOM FOLDERU:
+════════════════════════════════════════════════════════════════════════════════
+
+1. UPUTSTVO.txt                          <- OVAJ FAJL
+2. ITKompanijaDW_kreiranje.sql           <- SQL za kreiranje baze + podataka + VIEW-ova
+3. PowerDesigner_CDM_script.vbs          <- VBScript za CDM u PowerDesigner-u
+4. PowerDesigner_PDM_reverse_engineer.sql <- SQL za Reverse Engineer u PDM
+5. Prodavnica filmova PRIMER.pdf         <- Primer seminarskog (referenca)
+
+
+════════════════════════════════════════════════════════════════════════════════
+  SLIKE KOJE TREBA DA SLIKAS (SCREENSHOT-UJES):
+════════════════════════════════════════════════════════════════════════════════
+
+Slika 1:  Konceptualni model (CDM) iz PowerDesigner-a
+Slika 2:  Fizicki model (PDM) iz PowerDesigner-a
+Slika 3:  Database Diagram iz SQL Server Management Studio
+Slika 4:  Data Source View iz BIDS-a
+Slika 5:  Dimenzije OLAP kocke
+Slika 6:  Mere OLAP kocke
+Slika 7:  Snowflake sema kocke
+Slika 8:  Time Dimension Wizard (podesavanje perioda)
+Slika 9:  Data Connection Wizard u Excel-u
+Slika 10: Grafikon prihoda po klijentima (bar chart)
+Slika 11: Grafikon produktivnosti po mesecima (line chart)
+Slika 12: Pie chart - raspodela po tehnologijama
+
+================================================================================
