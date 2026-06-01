@@ -6,12 +6,15 @@ import re
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
+from textwrap import fill
 
+import matplotlib.pyplot as plt
 from docx import Document
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.shared import Cm, Inches, Pt
+from matplotlib.ticker import StrMethodFormatter
 
 BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_PATH = BASE_DIR / 'Seminarski_rad_DW_ITKompanije.docx'
@@ -23,6 +26,90 @@ IMAGES = {
     'pdm': BASE_DIR / 'diagrami' / 'PDM.png',
     'db': BASE_DIR / 'diagrami' / 'DB_diagram.png',
 }
+CHART_OUTPUT_DIR = BASE_DIR / 'diagrami'
+
+PIVOT_CHARTS = [
+    {
+        'title': 'Produktivnost po odeljenjima',
+        'caption': 'Grafikon produktivnosti po odeljenjima',
+        'path': CHART_OUTPUT_DIR / 'pivot_1_produktivnost_odeljenja.png',
+        'categories': ['Design', 'Development', 'Management', 'QA'],
+        'series': {'Broj sati': [16, 177, 22, 52], 'Trošak rada': [416, 4922, 770, 1276]},
+        'orientation': 'vertical',
+        'category_label': 'Odeljenje',
+        'value_label': 'Broj sati / trošak rada',
+    },
+    {
+        'title': 'Produktivnost po projektima',
+        'caption': 'Grafikon produktivnosti po projektima',
+        'path': CHART_OUTPUT_DIR / 'pivot_2_produktivnost_projekti.png',
+        'categories': ['Analytics Dashboard', 'Cloud Migration', 'CRM sistem', 'E-Commerce platforma', 'Mobile Banking App'],
+        'series': {'Broj sati': [38, 49, 57, 67, 56], 'Trošak rada': [1070, 1509, 1681, 1796, 1328]},
+        'orientation': 'horizontal',
+        'category_label': 'Projekat',
+        'value_label': 'Broj sati / trošak rada',
+    },
+    {
+        'title': 'Produktivnost po zaposlenima',
+        'caption': 'Grafikon produktivnosti po zaposlenima',
+        'path': CHART_OUTPUT_DIR / 'pivot_3_produktivnost_zaposleni.png',
+        'categories': ['Ana Stojanović', 'Ivan Marković', 'Jelena Nikolić', 'Maja Ilić', 'Marko Petrović', 'Milica Đorđević', 'Nikola Todorović', 'Petar Pavlović', 'Stefan Jovanović'],
+        'series': {'Broj sati': [42, 30, 16, 22, 54, 21, 37, 23, 22]},
+        'orientation': 'horizontal',
+        'category_label': 'Zaposleni',
+        'value_label': 'Broj sati',
+    },
+    {
+        'title': 'Produktivnost po godinama',
+        'caption': 'Grafikon produktivnosti po godinama',
+        'path': CHART_OUTPUT_DIR / 'pivot_4_produktivnost_godine.png',
+        'categories': ['2024', '2025'],
+        'series': {'Broj sati': [180, 87], 'Trošak rada': [4805, 2579]},
+        'orientation': 'vertical',
+        'category_label': 'Godina',
+        'value_label': 'Broj sati / trošak rada',
+    },
+    {
+        'title': 'Prihodi po klijentima',
+        'caption': 'Grafikon prihoda po klijentima',
+        'path': CHART_OUTPUT_DIR / 'pivot_5_prihodi_klijenti.png',
+        'categories': ['AppDev Inc', 'CloudNet d.o.o', 'DataSys GmbH', 'TechCorp Solutions', 'WebPro Ltd'],
+        'series': {'Iznos': [10200, 18000, 27300, 23650, 26550]},
+        'orientation': 'horizontal',
+        'category_label': 'Klijent',
+        'value_label': 'Iznos prihoda',
+    },
+    {
+        'title': 'Prihodi po projektima',
+        'caption': 'Grafikon prihoda po projektima',
+        'path': CHART_OUTPUT_DIR / 'pivot_6_prihodi_projekti.png',
+        'categories': ['Analytics Dashboard', 'Cloud Migration', 'CRM sistem', 'E-Commerce platforma', 'Mobile Banking App'],
+        'series': {'Iznos': [10200, 18000, 27300, 23650, 26550], 'Budžet': [120000, 285000, 600000, 425000, 750000]},
+        'orientation': 'horizontal',
+        'category_label': 'Projekat',
+        'value_label': 'Iznos / budžet',
+    },
+    {
+        'title': 'Prihodi po godinama',
+        'caption': 'Grafikon prihoda po godinama',
+        'path': CHART_OUTPUT_DIR / 'pivot_7_prihodi_godine.png',
+        'categories': ['2024', '2025'],
+        'series': {'Iznos': [77500, 28200]},
+        'orientation': 'vertical',
+        'category_label': 'Godina',
+        'value_label': 'Iznos prihoda',
+    },
+    {
+        'title': 'Prihodi po kvartalima',
+        'caption': 'Grafikon prihoda po kvartalima',
+        'path': CHART_OUTPUT_DIR / 'pivot_8_prihodi_kvartali.png',
+        'categories': ['Q1', 'Q2', 'Q3', 'Q4'],
+        'series': {'Iznos': [48300, 31150, 21300, 4950]},
+        'orientation': 'vertical',
+        'category_label': 'Kvartal',
+        'value_label': 'Iznos prihoda',
+    },
+]
 
 PIVOT_TABLES = [
     {
@@ -318,6 +405,82 @@ def add_image(doc: Document, state: dict, image_path: Path, caption: str, width_
     p.add_run().add_picture(str(image_path), width=Inches(width_inches))
     add_caption(doc, f'Slika {state["figure"]}: {caption}')
     state['figure'] += 1
+
+
+
+def wrap_chart_label(text: str, width: int) -> str:
+    return fill(str(text), width=width, break_long_words=False)
+
+
+
+def add_bar_labels(ax, bars, orientation: str, max_value: float):
+    offset = max(max_value * 0.015, 1)
+    for bar in bars:
+        value = bar.get_width() if orientation == 'horizontal' else bar.get_height()
+        label = f'{value:,.0f}'.replace(',', ' ')
+        if orientation == 'horizontal':
+            ax.text(value + offset, bar.get_y() + bar.get_height() / 2, label, va='center', ha='left', fontsize=8)
+        else:
+            ax.text(bar.get_x() + bar.get_width() / 2, value + offset, label, va='bottom', ha='center', fontsize=8)
+
+
+
+def create_pivot_chart(chart: dict):
+    chart['path'].parent.mkdir(parents=True, exist_ok=True)
+    plt.style.use('seaborn-v0_8-whitegrid')
+    fig, ax = plt.subplots(figsize=(5.9, 3.8), dpi=150)
+    colors = ['#1F5A99', '#2A9D8F', '#76A9D5']
+    categories = chart['categories']
+    series_items = list(chart['series'].items())
+    positions = list(range(len(categories)))
+    max_value = max(max(values) for _, values in series_items)
+
+    if chart['orientation'] == 'horizontal':
+        bar_size = 0.72 / max(len(series_items), 1)
+        for idx, (label, values) in enumerate(series_items):
+            offset = (idx - (len(series_items) - 1) / 2) * bar_size
+            shifted = [pos + offset for pos in positions]
+            bars = ax.barh(shifted, values, height=bar_size * 0.9, color=colors[idx % len(colors)], label=label)
+            add_bar_labels(ax, bars, 'horizontal', max_value)
+        ax.set_yticks(positions)
+        ax.set_yticklabels([wrap_chart_label(item, 22) for item in categories], fontsize=9)
+        ax.set_xlabel(chart['value_label'], fontsize=10)
+        ax.set_ylabel(chart['category_label'], fontsize=10)
+        ax.set_xlim(0, max_value * 1.18)
+    else:
+        bar_size = 0.72 / max(len(series_items), 1)
+        for idx, (label, values) in enumerate(series_items):
+            offset = (idx - (len(series_items) - 1) / 2) * bar_size
+            shifted = [pos + offset for pos in positions]
+            bars = ax.bar(shifted, values, width=bar_size * 0.9, color=colors[idx % len(colors)], label=label)
+            add_bar_labels(ax, bars, 'vertical', max_value)
+        ax.set_xticks(positions)
+        ax.set_xticklabels([wrap_chart_label(item, 16) for item in categories], fontsize=9)
+        ax.set_xlabel(chart['category_label'], fontsize=10)
+        ax.set_ylabel(chart['value_label'], fontsize=10)
+        ax.set_ylim(0, max_value * 1.18)
+
+    ax.set_title(chart['title'], fontsize=12, fontweight='bold', pad=10)
+    ax.grid(axis='x' if chart['orientation'] == 'horizontal' else 'y', color='#D6DEE5', linewidth=0.8)
+    ax.grid(axis='y' if chart['orientation'] == 'horizontal' else 'x', visible=False)
+    ax.yaxis.set_major_formatter(StrMethodFormatter('{x:,.0f}'))
+    ax.xaxis.set_major_formatter(StrMethodFormatter('{x:,.0f}'))
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_color('#9AA7B2')
+    ax.spines['bottom'].set_color('#9AA7B2')
+    if len(series_items) > 1:
+        ax.legend(frameon=False, fontsize=9, loc='best')
+
+    fig.tight_layout()
+    fig.savefig(chart['path'], dpi=150, bbox_inches='tight', facecolor='white')
+    plt.close(fig)
+
+
+
+def generate_pivot_charts():
+    for chart in PIVOT_CHARTS:
+        create_pivot_chart(chart)
 
 
 
@@ -661,6 +824,11 @@ def build_document():
         if not image.exists():
             raise FileNotFoundError(f'Nedostaje slika: {image}')
 
+    generate_pivot_charts()
+    for chart in PIVOT_CHARTS:
+        if not chart['path'].exists():
+            raise FileNotFoundError(f'Nedostaje generisani grafik: {chart["path"]}')
+
     source_data = load_source_data()
     mdx_queries = load_mdx_queries()
     doc = Document()
@@ -754,13 +922,15 @@ def build_document():
     add_heading(doc, '5.3. Pivot analiza produktivnosti')
     for text in paragraphs(SECTION_TEXT['pivot_intro']):
         add_paragraph(doc, text)
-    for pivot in PIVOT_TABLES[:4]:
+    for pivot, chart in zip(PIVOT_TABLES[:4], PIVOT_CHARTS[:4]):
         add_table(doc, state, pivot['headers'], pivot['rows'], pivot['title'])
+        add_image(doc, state, chart['path'], chart['caption'], width_inches=5.9)
         add_paragraph(doc, pivot['analysis'])
 
     add_heading(doc, '5.4. Pivot analiza prihoda')
-    for pivot in PIVOT_TABLES[4:]:
+    for pivot, chart in zip(PIVOT_TABLES[4:], PIVOT_CHARTS[4:]):
         add_table(doc, state, pivot['headers'], pivot['rows'], pivot['title'])
+        add_image(doc, state, chart['path'], chart['caption'], width_inches=5.9)
         add_paragraph(doc, pivot['analysis'])
     add_paragraph(doc, 'Zajedničko posmatranje pivot tabela produktivnosti i prihoda pokazuje da OLAP pristup omogućava veoma brzo povezivanje operativnih i finansijskih pokazatelja. Na taj način rukovodstvo ne dobija samo izolovane izveštaje, već konzistentan okvir za procenu odnosa između uloženog rada, troškova i ostvarenih prihoda.')
 
