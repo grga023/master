@@ -1,0 +1,79 @@
+-- ============================================================
+-- MDX Upiti za prikaz OLAP kocke
+-- Seminarski: Data Warehouse IT kompanije, Ognjen Grgur
+--
+-- UPUTSTVO:
+-- 1. SSMS -> Connect -> Analysis Services -> localhost
+-- 2. New Query (MDX) ili File -> New -> Analysis Services MDX Query
+-- 3. Izaberi bazu: ITKompanijaDW_OLAP
+-- 4. Kopiraj upit -> Execute (F5)
+-- 5. Screenshot rezultata za seminarski
+-- ============================================================
+
+-- ==========================================
+-- KOCKA 1: cbProduktivnost
+-- ==========================================
+
+-- Upit 1: Produktivnost po ODELJENJIMA
+SELECT 
+  {[Measures].[Broj Sati], [Measures].[Trosak Rada], [Measures].[Satnica]} ON COLUMNS,
+  [Odeljenje].[Odeljenje].Members ON ROWS
+FROM [cbProduktivnost]
+
+-- ==========================================
+
+-- Upit 2: Produktivnost po PROJEKTIMA
+SELECT 
+  {[Measures].[Broj Sati], [Measures].[Trosak Rada]} ON COLUMNS,
+  [Projekat].[Projekat].Members ON ROWS
+FROM [cbProduktivnost]
+
+-- ==========================================
+
+-- Upit 3: Produktivnost po ZAPOSLENIMA
+SELECT 
+  {[Measures].[Broj Sati], [Measures].[Trosak Rada], [Measures].[Broj Evidencija]} ON COLUMNS,
+  [Zaposleni].[Zaposleni].Members ON ROWS
+FROM [cbProduktivnost]
+
+-- ==========================================
+
+-- Upit 4: Produktivnost po GODINAMA
+SELECT 
+  {[Measures].[Broj Sati], [Measures].[Trosak Rada]} ON COLUMNS,
+  [Godina].[Godina].Members ON ROWS
+FROM [cbProduktivnost]
+
+-- ==========================================
+-- KOCKA 2: cbPrihodi
+-- ==========================================
+
+-- Upit 5: Prihodi po KLIJENTIMA
+SELECT 
+  {[Measures].[Iznos], [Measures].[Ukupno Sati], [Measures].[Broj Faktura]} ON COLUMNS,
+  [Klijent].[Klijent].Members ON ROWS
+FROM [cbPrihodi]
+
+-- ==========================================
+
+-- Upit 6: Prihodi po PROJEKTIMA
+SELECT 
+  {[Measures].[Iznos], [Measures].[Budzet], [Measures].[Broj Faktura]} ON COLUMNS,
+  [Projekat].[Projekat].Members ON ROWS
+FROM [cbPrihodi]
+
+-- ==========================================
+
+-- Upit 7: Prihodi po GODINAMA i KVARTALIMA
+SELECT 
+  {[Measures].[Iznos], [Measures].[Broj Faktura]} ON COLUMNS,
+  [Godina].[Godina].Members ON ROWS
+FROM [cbPrihodi]
+
+-- ==========================================
+
+-- Upit 8: Prihodi po kvartalima
+SELECT 
+  {[Measures].[Iznos], [Measures].[Ukupno Sati]} ON COLUMNS,
+  [Kvartal].[Kvartal].Members ON ROWS
+FROM [cbPrihodi]
