@@ -46,7 +46,17 @@ Data Warehouse (skladište podataka) za IT kompaniju "DevSoft d.o.o." koja se ba
 |------|------|
 | `ITKompanijaDW_kreiranje.sql` | Glavni SQL - kreira bazu, tabele, test podatke, VIEW-ove |
 | `ITKompanijaDW_reverse_for_Oracle_DM.sql` | DDL za import u Oracle Data Modeler (Reverse Engineer) |
+| `FIX_permisije_za_OLAP.sql` | SQL fix za OLAP permisije |
+| `OLAP_kocka_XMLA.xmla` | XMLA skripta - kreira OLAP bazu, dimenzije, kocke |
+| `OLAP_kocka_PROCESS.xmla` | XMLA skripta - procesira (puni) kocku |
+| `OLAP_kocka_DELETE.xmla` | XMLA skripta - briše OLAP bazu |
+| `MDX_upiti_za_kocku.mdx` | MDX upiti za prikaz podataka iz kocke |
+| `Excel_Pivot_OLAP.vba` | VBA makro za automatsko kreiranje pivot tabela |
+| `OLAP_Pivot_Tabele.xlsx` | Excel sa pivot tabelama i grafikonima (8 sheetova) |
 | `UPUTSTVO_Oracle_DataModeler.md` | Vodič za Oracle SQL Developer Data Modeler (CDM/PDM) |
+| `UPUTSTVO_OLAP_kocka.md` | Vodič za kreiranje OLAP kocke |
+| `TODO.md` | Praćenje progresa |
+| `diagrami/` | Folder sa svim slikama (CDM, PDM, dijagrami, analiza) |
 | `PowerDesigner_CDM_script.vbs` | VBScript za PowerDesigner (alternativa, nije potreban) |
 | `PowerDesigner_PDM_reverse_engineer.sql` | SQL za Reverse Engineer u PowerDesigner-u (alternativa) |
 | `UPUTSTVO.txt` | Detaljan korak-po-korak vodič za izradu |
@@ -61,20 +71,30 @@ Data Warehouse (skladište podataka) za IT kompaniju "DevSoft d.o.o." koja se ba
 3. **SQL Server BIDS (ili SSDT)** - OLAP kocka
 4. **Microsoft Excel 2010+** - Pivot tabele i grafikoni
 
-## Šta je ostalo da se uradi
-- [ ] U Oracle Data Modeler: Import DDL → dobiti PDM → Engineer to Logical → dobiti CDM
-- [ ] Eksportovati slike: CDM (Slika 1) i PDM (Slika 2)
-- [ ] Pokrenuti SQL skriptu u SSMS i napraviti Database Diagram (Slika 3)
-- [ ] U BIDS-u kreirati Analysis Services projekat (Slike 4-8)
-- [ ] U Excel-u napraviti Pivot tabele i grafikone (Slike 9-12)
-- [ ] Napisati/formatirati finalni Word dokument sa svim slikama
+## Šta je urađeno
+- [x] CDM slika (Oracle Data Modeler) → `diagrami/slika 1.png`
+- [x] PDM slika (Oracle Data Modeler) → `diagrami/slika2 relation.png`
+- [x] Database Diagram u SSMS → `diagrami/diag baze pod.png`
+- [x] OLAP kocka (cbProduktivnost + cbPrihodi) kreirana i procesirana
+- [x] Pivot tabele i grafikoni → `OLAP_Pivot_Tabele.xlsx` (8 sheetova)
+- [x] VIEW rezultati → `diagrami/anal troskova rada.png`, `analiza prihoda.png`, `analiza tehnologija.png`
 
-## Brzi start za CDM/PDM (Oracle Data Modeler)
-1. Skini ZIP sa oracle.com, raspakuj, pokreni `datamodeler.exe`
-2. `File → Import → DDL File` → odaberi `ITKompanijaDW_reverse_for_Oracle_DM.sql`
-3. RDBMS: SQL Server → Import → dobijaš PDM (Slika 2)
-4. `Engineer → Engineer to Logical Model` → dobijaš CDM (Slika 1)
-5. Eksportuj slike: `File → Export → To Image File`
+## Šta je ostalo
+- [ ] Napisati/formatirati finalni Word dokument sa svim slikama
+- [ ] Naslovna strana, sadržaj, zaključak
+
+## Slike za seminarski (kompletna lista)
+| # | Opis | Fajl |
+|---|------|------|
+| 1 | CDM (Konceptualni model) | `diagrami/slika 1.png` |
+| 2 | PDM (Fizički/Relacijski model) | `diagrami/slika2 relation.png` |
+| 3 | Database Diagram | `diagrami/diag baze pod.png` |
+| 4 | VIEW: Analiza troška rada | `diagrami/anal troskova rada.png` |
+| 5 | VIEW: Analiza prihoda | `diagrami/analiza prihoda.png` |
+| 6 | VIEW: Analiza tehnologija | `diagrami/analiza tehnologija.png` |
+| 7 | Korisni SELECT upiti | `diagrami/korisniSelectModeli.png` |
+| 8-11 | Pivot tabele (iz Excel-a) | `OLAP_Pivot_Tabele.xlsx` - screenshotovati sheetove |
+| 12 | Grafikon (iz Excel-a) | `OLAP_Pivot_Tabele.xlsx` - screenshotovati chart |
 
 ## Kontekst za nastavak sesije
 Ako treba ponovo da nastaviš rad sa AI asistentom, daj mu ovaj fajl i reci:
