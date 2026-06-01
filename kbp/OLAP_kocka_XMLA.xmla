@@ -400,7 +400,7 @@
                     <Name>Broj Sati</Name>
                     <AggregateFunction>Sum</AggregateFunction>
                     <Source>
-                      <DataType>Decimal</DataType>
+                      <DataType>Double</DataType>
                       <Source xsi:type="ColumnBinding">
                         <TableID>dbo_Analiza_troska_rada</TableID>
                         <ColumnID>brojSati</ColumnID>
@@ -412,7 +412,7 @@
                     <Name>Trosak Rada</Name>
                     <AggregateFunction>Sum</AggregateFunction>
                     <Source>
-                      <DataType>Decimal</DataType>
+                      <DataType>Double</DataType>
                       <Source xsi:type="ColumnBinding">
                         <TableID>dbo_Analiza_troska_rada</TableID>
                         <ColumnID>TrosakRada</ColumnID>
@@ -424,7 +424,7 @@
                     <Name>Prosecna Satnica</Name>
                     <AggregateFunction>Avg</AggregateFunction>
                     <Source>
-                      <DataType>Decimal</DataType>
+                      <DataType>Double</DataType>
                       <Source xsi:type="ColumnBinding">
                         <TableID>dbo_Analiza_troska_rada</TableID>
                         <ColumnID>satnica</ColumnID>
@@ -436,7 +436,7 @@
                     <Name>Broj Evidencija</Name>
                     <AggregateFunction>Count</AggregateFunction>
                     <Source>
-                      <DataType>Integer</DataType>
+                      <DataType>BigInt</DataType>
                       <Source xsi:type="ColumnBinding">
                         <TableID>dbo_Analiza_troska_rada</TableID>
                         <ColumnID>idEvidencije</ColumnID>
@@ -595,7 +595,7 @@
                     <Name>Iznos</Name>
                     <AggregateFunction>Sum</AggregateFunction>
                     <Source>
-                      <DataType>Decimal</DataType>
+                      <DataType>Double</DataType>
                       <Source xsi:type="ColumnBinding">
                         <TableID>dbo_Analiza_prihoda</TableID>
                         <ColumnID>iznos</ColumnID>
@@ -607,7 +607,7 @@
                     <Name>Ukupno Sati</Name>
                     <AggregateFunction>Sum</AggregateFunction>
                     <Source>
-                      <DataType>Decimal</DataType>
+                      <DataType>Double</DataType>
                       <Source xsi:type="ColumnBinding">
                         <TableID>dbo_Analiza_prihoda</TableID>
                         <ColumnID>ukupnoSati</ColumnID>
@@ -619,7 +619,7 @@
                     <Name>Budzet Projekta</Name>
                     <AggregateFunction>Sum</AggregateFunction>
                     <Source>
-                      <DataType>Decimal</DataType>
+                      <DataType>Double</DataType>
                       <Source xsi:type="ColumnBinding">
                         <TableID>dbo_Analiza_prihoda</TableID>
                         <ColumnID>budzet</ColumnID>
@@ -631,7 +631,7 @@
                     <Name>Broj Faktura</Name>
                     <AggregateFunction>Count</AggregateFunction>
                     <Source>
-                      <DataType>Integer</DataType>
+                      <DataType>BigInt</DataType>
                       <Source xsi:type="ColumnBinding">
                         <TableID>dbo_Analiza_prihoda</TableID>
                         <ColumnID>idFakture</ColumnID>
@@ -727,3 +727,4 @@
     </ObjectDefinition>
   </Create>
 </Batch>
+
