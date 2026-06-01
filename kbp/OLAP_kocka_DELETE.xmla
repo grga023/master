@@ -1,0 +1,9 @@
+<!-- Obrisi OLAP bazu pre ponovnog kreiranja -->
+<!-- SSMS -> Connect -> Analysis Services -> localhost -->
+<!-- New XMLA Query -> zalepi -> F5 -->
+
+<Delete xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <Object>
+    <DatabaseID>ITKompanijaDW_OLAP</DatabaseID>
+  </Object>
+</Delete>

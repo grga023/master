@@ -301,6 +301,13 @@
                     </Source>
                   </KeyColumn>
                 </KeyColumns>
+                <NameColumn>
+                  <DataType>WChar</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_Analiza_troska_rada</TableID>
+                    <ColumnID>Godina</ColumnID>
+                  </Source>
+                </NameColumn>
               </Attribute>
               <Attribute>
                 <ID>attr_Kvartal</ID>
@@ -314,6 +321,13 @@
                     </Source>
                   </KeyColumn>
                 </KeyColumns>
+                <NameColumn>
+                  <DataType>WChar</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_Analiza_troska_rada</TableID>
+                    <ColumnID>Kvartal</ColumnID>
+                  </Source>
+                </NameColumn>
               </Attribute>
               <Attribute>
                 <ID>attr_Mesec</ID>
@@ -327,6 +341,13 @@
                     </Source>
                   </KeyColumn>
                 </KeyColumns>
+                <NameColumn>
+                  <DataType>WChar</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_Analiza_troska_rada</TableID>
+                    <ColumnID>Mesec</ColumnID>
+                  </Source>
+                </NameColumn>
               </Attribute>
             </Attributes>
             <Hierarchies>
