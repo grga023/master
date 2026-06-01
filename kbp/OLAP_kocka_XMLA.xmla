@@ -422,7 +422,7 @@
                   <Measure>
                     <ID>m_ProsecnaSatnica</ID>
                     <Name>Prosecna Satnica</Name>
-                    <AggregateFunction>Avg</AggregateFunction>
+                    <AggregateFunction>LastNonEmpty</AggregateFunction>
                     <Source>
                       <DataType>Double</DataType>
                       <Source xsi:type="ColumnBinding">
@@ -727,4 +727,5 @@
     </ObjectDefinition>
   </Create>
 </Batch>
+
 
