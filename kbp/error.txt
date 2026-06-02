@@ -1,4 +1,0 @@
-Msg 15025, Level 16, State 2, Line 16
-The server principal 'NT SERVICE\MSSQLServerOLAPService' already exists.
-Msg 15023, Level 16, State 1, Line 20
-User, group, or role 'NT SERVICE\MSSQLServerOLAPService' already exists in the current database.
